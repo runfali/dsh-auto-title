@@ -1,0 +1,11 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# logs
+*.log
+
+# os / editor
+.DS_Store
+.idea/
+.vscode/
