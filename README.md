@@ -1,8 +1,8 @@
 # dsh-auto-title
 
-Hermes 对标的 DSH 会话自动标题插件 — 前端立刻截取 + 后端异步 LLM 标题，think 标签过滤，每会话仅一次，手动改名后不再覆盖。零侵入 bundle 插件。
+DSH 会话自动标题插件 — 前端立刻截取 + 后端异步 LLM 标题，think 标签过滤，每会话仅一次，手动改名后不再覆盖。零侵入 bundle 插件。
 
-## 流程（对标 Hermes）
+## 流程
 
 1. **新会话首问**：前端立刻截取首句做临时标题展示（乐观更新，无需等待后端）。
 2. **首轮完整问答**：用户首问 + 助手回复流式结束后，后端异步非阻塞调用 LLM 生成正式简短标题，覆盖临时标题，前端侧边栏原地刷新。
@@ -62,7 +62,7 @@ dsh plugin --profile web remove dsh-auto-title
 
 ## 实现细节
 
-- 后端：监听 `session/event: assistant/message`，判定首轮（1 user + 1 assistant 且为根会话），异步非阻塞调用 `ctx.llm.stream`，系统提示对标 DSH title-llm，过滤 think 标签后 `normalizeSessionTitle` 并 `session.append('session/title', {source:{kind:'provider',provider:'dsh-auto-title'}})`
+- 后端：监听 `session/event: assistant/message`，判定首轮（1 user + 1 assistant 且为根会话），异步非阻塞调用 `ctx.llm.stream`，系统提示参考 DSH title-llm，过滤 think 标签后 `normalizeSessionTitle` 并 `session.append('session/title', {source:{kind:'provider',provider:'dsh-auto-title'}})`
 - 前端：`lib/client.js` 在设置卡片外另注入乐观钩子，拦截输入框回车/点击发送及 MutationObserver 监听用户消息，`firstSentence → fallbackSessionTitle → truncateUtf8` 计算后原地替换侧边栏“新会话”占位，待后端正式标题通过 projection 刷新后自然覆盖
 - 失败路径：LLM 空输出、超时、路由缺失等均仅 warn 并保留临时标题
 

@@ -1,7 +1,7 @@
 /**
- * dsh-auto-title — Hermes 对标的会话自动标题插件（DSH Cordis 插件）。
+ * dsh-auto-title — DSH 会话自动标题插件（DSH Cordis 插件）。
  *
- * 设计对标 Hermes：
+ * 设计：
  *  1. 前端立刻截取首句做临时标题展示（乐观更新，lib/client.js 负责）
  *  2. 第一轮完整问答（用户提问 + 助手回复流式结束后）后台异步非阻塞调用 LLM 生成正式简短标题，覆盖临时标题
  *  3. 每会话只自动生成一次；用户手动改标题后（source=user）不再自动覆盖

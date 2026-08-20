@@ -1,7 +1,7 @@
 {
   "name": "dsh-auto-title",
   "version": "0.1.0",
-  "description": "Hermes-aligned automatic session title plugin for DeepSeek Harness — immediate fallback + async LLM title after first round, think-tag filtered, once-per-session, user-pin respected. Zero-intrusion bundle plugin.",
+  "description": "Automatic session title plugin for DSH — immediate fallback + async LLM title, think-tag filtered, once per session, respects manual rename. Zero-intrusion bundle plugin.",
   "type": "module",
   "main": "src/index.js",
   "exports": {
@@ -22,8 +22,7 @@
     "dsh-plugin",
     "deepseek-harness",
     "session-title",
-    "auto-title",
-    "hermes"
+    "auto-title"
   ],
   "engines": {
     "node": ">=22"
